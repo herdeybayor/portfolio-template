@@ -1,9 +1,14 @@
 ---
 import "@/styles/globals.css";
 import { Button } from "@/components/ui/button";
+import { BlurFade } from "@/components/ui/blur-fade";
 ---
 
 <div class="flex flex-col items-center justify-center h-screen">
-    <h1 class="text-4xl font-bold">Hello World</h1>
-    <Button>Click me</Button>
+    <BlurFade client:load>
+        <h1 class="text-4xl font-bold">Hello World</h1>
+    </BlurFade>
+    <BlurFade client:load>
+        <Button>Click me</Button>
+    </BlurFade>
 </div>
