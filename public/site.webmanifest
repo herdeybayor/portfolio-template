@@ -1,21 +1,13 @@
 {
-    "name": "Your Portfolio",
-    "short_name": "Portfolio",
-    "description": "Personal portfolio showcasing work, skills, and experience",
+    "name": "Sherifdeen's Portfolio",
+    "short_name": "Sherifdeen's Portfolio",
+    "description": "Creative Full-stack Developer with expertise in building performant front-end interfaces, optimizing back-end code, and developing engaging mobile experiences. I thrive in collaborative environments and am always passionate about using technology to solve real-world problems.",
     "start_url": "/",
-    "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#ffffff",
     "icons": [
-        {
-            "src": "/android-chrome-192x192.png",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "/android-chrome-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        }
-    ]
+        { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+        { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+    ],
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone"
 }
