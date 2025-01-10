@@ -22,9 +22,7 @@ featured: true
 draft: false
 ---
 
-# Tride
-
-Tride is revolutionizing banking for churches and ministries in Africa. As a fintech platform, it provides dedicated GTBank accounts and streamlined financial services specifically designed for religious organizations, making it easier to manage donations and funds.
+![Tride](/images/projects/tride.jpeg)
 
 ## Features
 

@@ -19,10 +19,12 @@ interface Props {
 const { name, social, location } = Astro.props;
 ---
 
-<header role="banner" class="sticky top-16 z-50">
+<header role="banner">
     <BlurFade client:load>
         <nav class="flex items-center gap-4 rounded-full bg-white/50 dark:bg-gray-950/50 p-4 border border-border dark:border-gray-800 shadow-sm" aria-label="Main navigation">
-            <span class="text-sm font-medium" aria-label="Full name">{name}</span>
+            <a href="/" class="flex items-center gap-2">
+                <span class="text-sm font-medium" aria-label="Full name">{name}</span>
+            </a>
             <Separator className="h-5" orientation="vertical" role="separator" aria-orientation="vertical" />
             <SocialLinks client:load social={social} />
             <Separator className="h-5" orientation="vertical" role="separator" aria-orientation="vertical" />

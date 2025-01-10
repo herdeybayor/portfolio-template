@@ -1,0 +1,28 @@
+---
+import { BlurFade } from "@/components/ui/blur-fade";
+import { SocialLinks } from "@/components/social-links";
+import { Separator } from "@/components/ui/separator";
+
+interface Props {
+    social: any;
+}
+
+const { social } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer role="contentinfo" class="w-full py-6 mt-8">
+    <BlurFade client:load>
+        <div class="container max-w-screen-md mx-auto">
+            <div class="flex flex-col items-center gap-4">
+                <div class="flex items-center gap-4">
+                    <SocialLinks client:load social={social} />
+                </div>
+                <Separator className="w-full" />
+                <p class="text-sm text-muted-foreground text-center">
+                    © {year} • Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="underline hover:text-foreground">Astro</a>
+                </p>
+            </div>
+        </div>
+    </BlurFade>
+</footer>

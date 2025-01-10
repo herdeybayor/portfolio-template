@@ -1,0 +1,45 @@
+---
+import { getCollection } from "astro:content";
+import { ClientRouter } from "astro:transitions";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/header.astro";
+import Footer from "@/components/footer.astro";
+import { ProjectCard } from "@/components/project-card";
+import { BlurFade } from "@/components/ui/blur-fade";
+import { BlurFadeText } from "@/components/ui/blur-fade-text";
+
+const BLUR_FADE_DELAY = 0.04;
+
+const [profile] = await getCollection("profile");
+const projects = await getCollection("projects", ({ data }) => !data.draft);
+---
+
+<Layout title="Projects - Portfolio" description="View all my projects and case studies">
+    <ClientRouter />
+    <div class="flex flex-col items-center min-h-screen py-16 container max-w-screen-md space-y-10">
+        <Header name={profile.data.name} social={profile.data.contact.social} location={profile.data.location} />
+
+        <main role="main" class="flex-1 w-full">
+            <BlurFadeText client:load delay={BLUR_FADE_DELAY * 2} text="All Projects" className="text-3xl font-bold mb-8" yOffset={8} aria-label="All Projects" />
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 list-none p-0" role="list">
+                {
+                    projects.map((project, index) => (
+                        <BlurFade client:load delay={BLUR_FADE_DELAY * 3 * index + 0.02}>
+                            <ProjectCard
+                                href={`/projects/${project.slug}`}
+                                title={project.data.title}
+                                description={project.data.description}
+                                dates={project.data.dates}
+                                tags={project.data.technologies}
+                                image={project.data.image}
+                                links={project.data.links}
+                            />
+                        </BlurFade>
+                    ))
+                }
+            </div>
+        </main>
+
+        <Footer social={profile.data.contact.social} />
+    </div>
+</Layout>

@@ -20,9 +20,7 @@ featured: true
 draft: false
 ---
 
-# KeenzChillz
-
-KeenzChillz is a premium property management service that specializes in providing serviced accommodations across various locations in the UK. As a family-oriented business, we understand and cater to the diverse needs of every family member, ensuring our properties deliver comfort and convenience for all guests.
+![KeenzChillz](/images/projects/keenzchillz.jpeg)
 
 ## Key Features
 
