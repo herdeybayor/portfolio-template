@@ -1,0 +1,42 @@
+---
+interface Props {
+    title: string;
+    description: string;
+    image?: string;
+    canonicalURL?: string;
+    type?: string;
+}
+
+const { title, description, image = "/og-image.png", canonicalURL = Astro.url.href, type = "website" } = Astro.props;
+
+// Ensure image URL is absolute
+const absoluteImageUrl = new URL(image, Astro.url.origin).href;
+---
+
+<!-- Global Meta Tags -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+<meta name="generator" content={Astro.generator} />
+
+<!-- Open Graph -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={Astro.url.href} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={absoluteImageUrl} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={Astro.url.href} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={absoluteImageUrl} />
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+<!-- Theme -->
+<meta name="theme-color" content="#ffffff" />

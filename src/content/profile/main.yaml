@@ -1,0 +1,73 @@
+name: "Sherifdeen Adebayo"
+initials: "SA"
+url: "https://sherifdeen.dev"
+resumeUrl: "https://dub.sh/herdeybayor-resume"
+location:
+    country:
+        code: "NG"
+        name: "Nigeria"
+        flag: "🇳🇬"
+    city: "Lagos"
+    link: "https://www.google.com/maps/place/lagos"
+description: "Creative Full-stack Developer with a proven track record of building impactful web and mobile solutions that drive growth. Spearheaded the creation of a fully customized online accommodations booking platform using Reactjs, Nextjs, Tailwindcss, Typescript, and Nodejs, resulting in a 25% faster booking process and secure payment gateway."
+summary: "Creative Full-stack Developer with expertise in building performant front-end interfaces, optimizing back-end code, and developing engaging mobile experiences. I thrive in collaborative environments and am always passionate about using technology to solve real-world problems."
+avatarUrl: "/images/profile/avatar.png"
+skills:
+    - JavaScript
+    - TypeScript
+    - React.js
+    - Next.js
+    - Remix
+    - Angular
+    - Node.js
+    - Python
+    - Django
+    - Docker
+    - C#
+    - PHP
+    - Laravel
+    - NestJS
+    - React Native
+    - C++
+    - Figma
+    - iOS Development
+    - Android Development
+    - AI Engineering
+    - Java
+    - AWS
+navbar:
+    - href: "/"
+      label: "Home"
+      icon: "HomeIcon"
+    - href: "/blog"
+      label: "Blog"
+      icon: "NotebookIcon"
+contact:
+    email: "herdeybayor4real@gmail.com"
+    tel: "+2348187545963"
+    social:
+        GitHub:
+            name: "GitHub"
+            url: "https://dub.sh/herdeybayor-github"
+            icon: "github"
+            navbar: true
+        LinkedIn:
+            name: "LinkedIn"
+            url: "https://www.linkedin.com/in/herdeybayor/"
+            icon: "linkedin"
+            navbar: true
+        X:
+            name: "X"
+            url: "https://dub.sh/herdeybayor-twitter"
+            icon: "x"
+            navbar: true
+        Youtube:
+            name: "Youtube"
+            url: "https://dub.sh/herdeybayor-youtube"
+            icon: "youtube"
+            navbar: true
+        email:
+            name: "Send Email"
+            url: "mailto:herdeybayor4real@gmail.com"
+            icon: "email"
+            navbar: false
