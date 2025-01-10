@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    darkMode: ["class"],
     content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
+    darkMode: "class",
     theme: {
         container: {
             screens: {
@@ -61,6 +61,9 @@ export default {
                     4: "hsl(var(--chart-4))",
                     5: "hsl(var(--chart-5))",
                 },
+            },
+            fontFamily: {
+                sans: ["Inter", "system-ui", "sans-serif"],
             },
         },
     },

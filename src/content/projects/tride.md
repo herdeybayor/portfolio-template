@@ -19,6 +19,7 @@ links:
       icon: "globe"
 image: "/images/projects/tride.jpeg"
 featured: true
+draft: false
 ---
 
 # Tride

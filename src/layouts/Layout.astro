@@ -12,25 +12,18 @@ const { title = "Portfolio", description = "Personal portfolio showcasing my wor
 ---
 
 <script is:inline>
-    const getThemePreference = () => {
-        if (typeof localStorage !== "undefined") {
-            const storedTheme = localStorage.getItem("theme");
-            if (storedTheme) {
-                return storedTheme;
-            }
+    // Preload theme to prevent flash
+    const theme = (() => {
+        if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+            return localStorage.getItem("theme");
         }
         return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    };
+    })();
 
-    // Set the theme only once at initial load
-    const theme = getThemePreference();
     document.documentElement.classList.toggle("dark", theme === "dark");
+    document.documentElement.classList.add("scroll-smooth");
 
     if (typeof localStorage !== "undefined") {
-        // Store initial theme
-        localStorage.setItem("theme", theme);
-
-        // Observe theme changes
         const observer = new MutationObserver(() => {
             const isDark = document.documentElement.classList.contains("dark");
             localStorage.setItem("theme", isDark ? "dark" : "light");
@@ -39,27 +32,52 @@ const { title = "Portfolio", description = "Personal portfolio showcasing my wor
     }
 </script>
 
-<html lang="en">
+<html lang="en" class="scroll-smooth">
     <head>
         <SEO title={title} description={description} image={image} type={type} />
+
+        <!-- Preload critical fonts -->
+        <link rel="preload" href="/fonts/inter/InterVariable.ttf" as="font" type="font/ttf" crossorigin />
     </head>
-    <body class="min-h-screen bg-background text-foreground antialiased">
+    <body class="min-h-screen bg-background text-foreground antialiased font-sans">
+        <!-- Skip to main content -->
         <a
             href="#main-content"
             class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-background focus:text-foreground focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
         >
             Skip to main content
         </a>
-        <div id="main-content" class="relative">
+
+        <!-- Main content -->
+        <div id="main-content" class="relative" role="main">
             <slot />
         </div>
+
+        <!-- Offline support -->
+        <script>
+            if ("serviceWorker" in navigator) {
+                window.addEventListener("load", () => {
+                    navigator.serviceWorker.register("/sw.js").catch(console.error);
+                });
+            }
+        </script>
     </body>
 </html>
 
 <style is:global>
+    /* Font face declarations */
+    @font-face {
+        font-family: "Inter";
+        src: url("/fonts/inter/InterVariable.ttf") format("truetype-variations");
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: swap;
+    }
+
     :root {
         --background: 0 0% 100%;
         --foreground: 240 10% 3.9%;
+        color-scheme: light dark;
     }
 
     .dark {
@@ -67,14 +85,28 @@ const { title = "Portfolio", description = "Personal portfolio showcasing my wor
         --foreground: 0 0% 98%;
     }
 
-    html {
-        scroll-behavior: smooth;
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
     }
 
     body {
         margin: 0;
         width: 100%;
         height: 100%;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 
     /* Improve focus styles */
@@ -92,5 +124,17 @@ const { title = "Portfolio", description = "Personal portfolio showcasing my wor
     .no-scrollbar {
         -ms-overflow-style: none; /* IE and Edge */
         scrollbar-width: none; /* Firefox */
+    }
+
+    /* Print styles */
+    @media print {
+        body {
+            background: white;
+            color: black;
+        }
+
+        @page {
+            margin: 2cm;
+        }
     }
 </style>
