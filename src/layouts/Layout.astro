@@ -35,10 +35,24 @@ const { title = "Portfolio", description = "Personal portfolio showcasing my wor
 
 <html lang="en" class="scroll-smooth">
     <head>
+        <!-- Resource hints -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+
         <SEO title={title} description={description} image={image} type={type} />
 
         <!-- Preload critical fonts -->
-        <link rel="preload" href="/fonts/inter/InterVariable.ttf" as="font" type="font/ttf" crossorigin />
+        <link rel="preload" href="/fonts/inter/InterVariable.ttf" as="font" type="font/ttf" crossorigin fetchpriority="high" />
+
+        <!-- PWA meta tags -->
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="application-name" content={title} />
+        <meta name="apple-mobile-web-app-title" content={title} />
+        <meta name="msapplication-TileColor" content="#000000" />
+        <meta name="msapplication-config" content="/browserconfig.xml" />
+        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
     </head>
     <body class="min-h-screen bg-background text-foreground antialiased font-sans">
         <!-- Skip to main content -->
@@ -58,7 +72,12 @@ const { title = "Portfolio", description = "Personal portfolio showcasing my wor
         <script>
             if ("serviceWorker" in navigator) {
                 window.addEventListener("load", () => {
-                    navigator.serviceWorker.register("/sw.js").catch(console.error);
+                    navigator.serviceWorker
+                        .register("/sw.js", {
+                            scope: "/",
+                            type: "module",
+                        })
+                        .catch(console.error);
                 });
             }
         </script>
