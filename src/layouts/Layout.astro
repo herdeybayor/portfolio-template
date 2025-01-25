@@ -1,6 +1,8 @@
 ---
 import "@/styles/globals.css";
 import SEO from "@/components/seo.astro";
+import { getCollection } from "astro:content";
+import SidebarLayout from "./SidebarLayout.astro";
 
 interface Props {
     title?: string;
@@ -10,6 +12,7 @@ interface Props {
 }
 
 const { title = "Portfolio", description = "Personal portfolio showcasing my work, skills, and experience.", image, type } = Astro.props;
+const [profile] = await getCollection("profile");
 ---
 
 <script is:inline>
@@ -65,7 +68,16 @@ const { title = "Portfolio", description = "Personal portfolio showcasing my wor
 
         <!-- Main content -->
         <div id="main-content" class="relative" role="main">
-            <slot />
+            <SidebarLayout
+                sidebar={profile.data.navbar}
+                title={profile.data.name}
+                tagline={profile.data.tagline}
+                social={Object.values(profile.data.contact.social)}
+                avatarUrl={profile.data.avatarUrl}
+                initials={profile.data.initials}
+            >
+                <slot /></SidebarLayout
+            >
         </div>
 
         <!-- Offline support -->

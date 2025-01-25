@@ -5,13 +5,14 @@ interface ProfileAvatarProps {
     avatarUrl: string;
     initials: string;
     className?: string;
+    fallbackClassName?: string;
 }
 
-export function ProfileAvatar({ name, avatarUrl, initials, className }: ProfileAvatarProps) {
+export function ProfileAvatar({ name, avatarUrl, initials, className, fallbackClassName }: ProfileAvatarProps) {
     return (
         <Avatar className={className}>
             <AvatarImage alt={name} src={avatarUrl} />
-            <AvatarFallback>{initials}</AvatarFallback>
+            <AvatarFallback className={fallbackClassName}>{initials}</AvatarFallback>
         </Avatar>
     );
 }

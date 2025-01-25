@@ -54,6 +54,7 @@ const blogSchema = z.object({
 
 const profileSchema = z.object({
     name: z.string(),
+    tagline: z.string(),
     initials: z.string(),
     url: z.string().url(),
     resumeUrl: z.string().url(),

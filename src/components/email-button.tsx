@@ -20,9 +20,9 @@ export function EmailButton({ email }: EmailButtonProps) {
     };
 
     return (
-        <Button variant="outline" size="lg" onClick={copyEmail}>
-            {copied ? "Copied!" : "Copy email"}
+        <Button variant="outline" size="lg" onClick={copyEmail} className="w-full md:w-auto">
             <Icons.copy className="size-4 ml-2" />
+            {copied ? "Copied!" : "Copy email"}
         </Button>
     );
 }

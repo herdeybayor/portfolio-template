@@ -1,0 +1,106 @@
+---
+import { Icons } from "@/components/icons";
+import { ModeToggle } from "@/components/mode-toggle";
+import { ProfileAvatar } from "@/components/ui/profile-avatar";
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
+
+interface Props {
+    title: string;
+    tagline: string;
+    avatarUrl: string;
+    initials: string;
+    social: {
+        name: string;
+        url: string;
+        icon: string;
+        navbar: boolean;
+    }[];
+    sidebar: {
+        href: string;
+        label: string;
+        icon?: string;
+    }[];
+}
+
+const { pathname } = Astro.url;
+const { sidebar, title, initials, tagline, avatarUrl, social } = Astro.props;
+
+const socialLinks = social.filter((item) => item.navbar);
+---
+
+<div class="flex flex-col lg:flex-row bg-[#F3F4F4] dark:bg-[#141414] h-screen overflow-hidden">
+    <div class="lg:w-64 lg:h-screen p-4 flex flex-col items-center">
+        <input hidden class="peer" type="checkbox" id="toggle" />
+        <div class="flex flex-row lg:flex-col items-center order-1 gap-2 lg:gap-4 mt-0 lg:mt-5 w-full">
+            <ProfileAvatar client:load name={title} avatarUrl={avatarUrl} initials={initials} className="size-12 lg:size-20 border rounded-xl" fallbackClassName="rounded-xl" />
+            <div class="flex flex-col items-start lg:items-center">
+                <h1 class="font-medium text-sm lg:text-base">{title}</h1>
+                <p class="text-xs lg:text-sm text-muted-foreground lg:mt-1">{tagline}</p>
+            </div>
+
+            <div class="lg:hidden mt-auto ml-auto flex items-center gap-2">
+                <ModeToggle client:load />
+                <Separator className="h-5" orientation="vertical" role="separator" aria-orientation="vertical" />
+                <label for="toggle" class="cursor-pointer">
+                    <div role="status" aria-label="Menu" class="flex flex-col items-start gap-1 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-md p-3 transition-all duration-200">
+                        <div class="h-0.5 w-5 rounded-full bg-gray-400 dark:bg-gray-400 transition-all duration-200"></div>
+                        <div class="h-0.5 w-3.5 rounded-full bg-gray-400 dark:bg-gray-400 transition-all duration-200"></div>
+                        <div class="h-0.5 w-5 rounded-full bg-gray-400 dark:bg-gray-400 transition-all duration-200"></div>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <Separator className="w-full mt-4 lg:mt-0 order-1 hidden lg:hidden peer-checked:block" />
+
+        <div class="items-center gap-8 lg:gap-4 mt-5 lg:mt-8 order-2 lg:order-1 hidden lg:flex peer-checked:flex">
+            {
+                socialLinks.map((item) => {
+                    const Icon = item.icon ? Icons[item.icon as keyof typeof Icons] : null;
+                    if (!Icon) return null;
+                    return (
+                        <a href={item.url} target="_blank" rel="noopener noreferrer" aria-label={item.name}>
+                            <Icon className="size-6 text-gray-500 dark:text-gray-400" />
+                        </a>
+                    );
+                })
+            }
+        </div>
+
+        <ul class="flex-col gap-2 mt-8 w-full order-1 px-4 lg:px-0 hidden lg:flex peer-checked:flex">
+            {
+                sidebar.map((item) => {
+                    const Icon = item.icon ? Icons[item.icon as keyof typeof Icons] : null;
+                    const isActive = pathname === item.href;
+                    return (
+                        <li>
+                            <a
+                                href={item.href}
+                                class={cn(
+                                    "flex items-center gap-2 p-2 hover:bg-gray-200 rounded-lg transition-colors duration-200 text-muted-foreground dark:hover:bg-muted",
+                                    isActive && "bg-gray-200 rounded-lg text-primary dark:bg-muted"
+                                )}
+                            >
+                                {Icon ? <Icon className="size-4" /> : null}
+                                <span class="text-sm">{item.label}</span>
+                            </a>
+                        </li>
+                    );
+                })
+            }
+        </ul>
+
+        <Separator className="w-full h-0.5 mt-4 lg:mt-0 order-1 lg:hidden hidden peer-checked:block" />
+
+        <div class="items-center justify-center gap-4 mt-auto order-3 hidden lg:flex">
+            <ModeToggle client:load />
+        </div>
+    </div>
+
+    <div class="flex-1 overflow-scroll p-4 pt-0 lg:mt-4">
+        <div class="bg-white dark:bg-[#1A1A1A] flex-1 rounded-xl flex flex-col shadow-lg">
+            <slot />
+        </div>
+    </div>
+</div>

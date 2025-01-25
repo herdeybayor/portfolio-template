@@ -16,11 +16,10 @@ const projects = await getCollection("projects", ({ data }) => !data.draft);
 <Layout title="Projects - Portfolio" description="View all my projects and case studies">
     <ClientRouter />
     <div class="flex flex-col items-center min-h-screen py-16 container max-w-screen-md space-y-10">
-        <Header name={profile.data.name} social={profile.data.contact.social} location={profile.data.location} />
-
         <main role="main" class="flex-1 w-full">
-            <BlurFade delay={BLUR_FADE_DELAY * 2} className="text-3xl font-bold mb-8" aria-label="All Projects"> All Projects </BlurFade>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 list-none p-0" role="list">
+            <BlurFade delay={BLUR_FADE_DELAY * 2} className="text-3xl font-bold" aria-label="All Projects"><h1>Projects</h1></BlurFade>
+            <p class="text-muted-foreground mt-2">Here are some of the projects I've worked on.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 list-none p-0 mt-8" role="list">
                 {
                     projects.map((project, index) => (
                         <BlurFade delay={BLUR_FADE_DELAY * 3 * index + 0.02}>

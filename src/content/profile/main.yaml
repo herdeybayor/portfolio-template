@@ -1,4 +1,5 @@
 name: "Sherifdeen Adebayo"
+tagline: "Software Engineer"
 initials: "SA"
 url: "https://sherifdeen.dev"
 resumeUrl: "https://dub.sh/herdeybayor-resume"
@@ -38,10 +39,19 @@ skills:
 navbar:
     - href: "/"
       label: "Home"
-      icon: "HomeIcon"
+      icon: "house"
+    - href: "/projects"
+      label: "Projects"
+      icon: "briefcase"
+    - href: "/about"
+      label: "About"
+      icon: "user"
     - href: "/blog"
       label: "Blog"
-      icon: "NotebookIcon"
+      icon: "pen"
+    - href: "/contact"
+      label: "Contact"
+      icon: "email"
 contact:
     email: "herdeybayor4real@gmail.com"
     tel: "+2348187545963"
@@ -60,11 +70,6 @@ contact:
             name: "X"
             url: "https://dub.sh/herdeybayor-twitter"
             icon: "x"
-            navbar: true
-        Youtube:
-            name: "Youtube"
-            url: "https://dub.sh/herdeybayor-youtube"
-            icon: "youtube"
             navbar: true
         email:
             name: "Send Email"

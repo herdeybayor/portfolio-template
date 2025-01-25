@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import { ClientRouter } from "astro:transitions";
+import SidebarLayout from "@/layouts/SidebarLayout.astro";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/header.astro";
 import Footer from "@/components/footer.astro";
@@ -25,23 +26,20 @@ const education = await getCollection("education");
 
 <Layout title={`${profile.data.name} - Portfolio`} description={profile.data.summary} type="profile" image={profile.data.avatarUrl}>
     <ClientRouter />
-    <div class="flex flex-col items-center min-h-screen py-16 container max-w-screen-md space-y-10">
-        <Header name={profile.data.name} social={profile.data.contact.social} location={profile.data.location} />
+    <div class="flex flex-col items-center py-12 lg:py-24 container max-w-screen-md space-y-10">
+        <main role="main" class="flex flex-col">
+            <div class="w-max flex items-center gap-2 bg-green-100 px-3 py-1 rounded-full" role="status" aria-label="Availability status">
+                <div class="size-1.5 rounded-full bg-green-800" aria-hidden="true"></div>
+                <span class="text-xs text-green-600">Available for hire</span>
+            </div>
 
-        <main role="main" class="flex flex-col items-center">
-            <BlurFade delay={BLUR_FADE_DELAY}>
-                <section aria-label="Profile" class="text-center">
-                    <ProfileAvatar client:load name={profile.data.name} avatarUrl={profile.data.avatarUrl} initials={profile.data.initials} className="size-28 border mt-11" />
-                </section>
-            </BlurFade>
-
-            <BlurFade delay={BLUR_FADE_DELAY * 2} className="mt-8 text-2xl md:text-3xl font-bold tracking-tighter sm:text-4xl xl:text-5xl/none">
+            <BlurFade delay={BLUR_FADE_DELAY} className="text-2xl mt-8 md:text-3xl font-bold tracking-tighter sm:text-4xl xl:text-5xl/none">
                 <h1 aria-label={`Hi, I'm ${profile.data.name.split(" ")[0]}`}>Hi, I'm {profile.data.name.split(" ")[0]} 👋</h1>
             </BlurFade>
 
             <BlurFade delay={BLUR_FADE_DELAY * 2}>
                 <section aria-label="About me" class="mt-3">
-                    <p class="text-sm md:text-xl text-muted-foreground text-center">{profile.data.summary}</p>
+                    <p class="text-sm md:text-base text-muted-foreground">{profile.data.summary}</p>
                 </section>
             </BlurFade>
 
@@ -50,13 +48,13 @@ const education = await getCollection("education");
                     <div class="flex flex-col md:flex-row items-center gap-4">
                         <a
                             href={profile.data.resumeUrl}
-                            class={cn(buttonVariants({ variant: "default", size: "lg" }))}
+                            class={cn(buttonVariants({ variant: "default", size: "lg" }), "w-full md:w-auto")}
                             target="_blank"
                             rel="noopener noreferrer"
-                            aria-label="Download my resume"
+                            aria-label="About Me"
                             download
                         >
-                            Download Resume
+                            About
                         </a>
                         <EmailButton client:load email={profile.data.contact.email} />
                     </div>
