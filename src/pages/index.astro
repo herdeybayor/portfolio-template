@@ -1,12 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import { ClientRouter } from "astro:transitions";
-import SidebarLayout from "@/layouts/SidebarLayout.astro";
 import Layout from "@/layouts/Layout.astro";
-import Header from "@/components/header.astro";
 import Footer from "@/components/footer.astro";
-import BlurFade from "@/components/ui/blur-fade.astro";
-import { ProfileAvatar } from "@/components/ui/profile-avatar";
 import { EmailButton } from "@/components/email-button";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -33,55 +29,47 @@ const education = await getCollection("education");
                 <span class="text-xs text-green-600">Available for hire</span>
             </div>
 
-            <BlurFade delay={BLUR_FADE_DELAY} className="text-2xl mt-8 md:text-3xl font-bold tracking-tighter sm:text-4xl xl:text-5xl/none">
-                <h1 aria-label={`Hi, I'm ${profile.data.name.split(" ")[0]}`}>Hi, I'm {profile.data.name.split(" ")[0]} 👋</h1>
-            </BlurFade>
+            <h1 aria-label={`Hi, I'm ${profile.data.name.split(" ")[0]}`} class="text-2xl mt-8 md:text-3xl font-bold tracking-tighter sm:text-4xl xl:text-5xl/none">
+                Hi, I'm {profile.data.name.split(" ")[0]} 👋
+            </h1>
 
-            <BlurFade delay={BLUR_FADE_DELAY * 2}>
-                <section aria-label="About me" class="mt-3">
-                    <p class="text-sm md:text-base text-muted-foreground">{profile.data.summary}</p>
-                </section>
-            </BlurFade>
+            <section aria-label="About me" class="mt-3">
+                <p class="text-sm md:text-base text-muted-foreground">{profile.data.summary}</p>
+            </section>
 
-            <BlurFade delay={BLUR_FADE_DELAY * 4}>
-                <section aria-label="Contact actions" class="mt-8">
-                    <div class="flex flex-col md:flex-row items-center gap-4">
-                        <a
-                            href={profile.data.resumeUrl}
-                            class={cn(buttonVariants({ variant: "default", size: "lg" }), "w-full md:w-auto")}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="About Me"
-                            download
-                        >
-                            About
-                        </a>
-                        <EmailButton client:load email={profile.data.contact.email} />
-                    </div>
-                </section>
-            </BlurFade>
+            <section aria-label="Contact actions" class="mt-8">
+                <div class="flex flex-col md:flex-row items-center gap-4">
+                    <a
+                        href={profile.data.resumeUrl}
+                        class={cn(buttonVariants({ variant: "default", size: "lg" }), "w-full md:w-auto")}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="About Me"
+                        download
+                    >
+                        About
+                    </a>
+                    <EmailButton client:load email={profile.data.contact.email} />
+                </div>
+            </section>
         </main>
 
         <section id="work" aria-labelledby="work-title">
             <div class="flex min-h-0 flex-col gap-y-3">
-                <BlurFade delay={BLUR_FADE_DELAY * 5}>
-                    <h2 id="work-title" class="text-xl font-bold">Work Experience</h2>
-                </BlurFade>
+                <h2 id="work-title" class="text-xl font-bold">Work Experience</h2>
                 {
                     sortedWork.map((work, id) => (
-                        <BlurFade delay={BLUR_FADE_DELAY * 6 + id * 0.05}>
-                            <ResumeCard
-                                client:load
-                                logoUrl={work.data.logoUrl}
-                                altText={work.data.company}
-                                title={work.data.company}
-                                subtitle={work.data.title}
-                                href={work.data.href}
-                                badges={work.data.badges}
-                                period={`${work.data.start} - ${work.data.end ?? "Present"}`}
-                                description={work.data.description}
-                            />
-                        </BlurFade>
+                        <ResumeCard
+                            client:load
+                            logoUrl={work.data.logoUrl}
+                            altText={work.data.company}
+                            title={work.data.company}
+                            subtitle={work.data.title}
+                            href={work.data.href}
+                            badges={work.data.badges}
+                            period={`${work.data.start} - ${work.data.end ?? "Present"}`}
+                            description={work.data.description}
+                        />
                     ))
                 }
             </div>
@@ -89,22 +77,18 @@ const education = await getCollection("education");
 
         <section id="education" aria-labelledby="education-title" class="w-full">
             <div class="flex min-h-0 flex-col gap-y-3">
-                <BlurFade delay={BLUR_FADE_DELAY * 7}>
-                    <h2 id="education-title" class="text-xl font-bold">Education</h2>
-                </BlurFade>
+                <h2 id="education-title" class="text-xl font-bold">Education</h2>
                 {
                     education.map((education, id) => (
-                        <BlurFade delay={BLUR_FADE_DELAY * 8 + id * 0.05}>
-                            <ResumeCard
-                                client:load
-                                href={education.data.href}
-                                logoUrl={education.data.logoUrl}
-                                altText={education.data.school}
-                                title={education.data.school}
-                                subtitle={education.data.degree}
-                                period={`${education.data.start} - ${education.data.end ?? "Present"}`}
-                            />
-                        </BlurFade>
+                        <ResumeCard
+                            client:load
+                            href={education.data.href}
+                            logoUrl={education.data.logoUrl}
+                            altText={education.data.school}
+                            title={education.data.school}
+                            subtitle={education.data.degree}
+                            period={`${education.data.start} - ${education.data.end ?? "Present"}`}
+                        />
                     ))
                 }
             </div>
@@ -112,44 +96,32 @@ const education = await getCollection("education");
 
         <section id="skills" aria-labelledby="skills-title">
             <div class="flex min-h-0 flex-col gap-y-3">
-                <BlurFade delay={BLUR_FADE_DELAY * 9}>
-                    <h2 id="skills-title" class="text-xl font-bold">Skills</h2>
-                </BlurFade>
+                <h2 id="skills-title" class="text-xl font-bold">Skills</h2>
                 <div class="flex flex-wrap gap-1" role="list">
-                    {
-                        profile.data.skills.map((skill, id) => (
-                            <BlurFade delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
-                                <Badge role="listitem">{skill}</Badge>
-                            </BlurFade>
-                        ))
-                    }
+                    {profile.data.skills.map((skill, id) => <Badge role="listitem">{skill}</Badge>)}
                 </div>
             </div>
         </section>
 
         <section id="projects" aria-labelledby="projects-title" class="w-full">
             <div class="flex min-h-0 flex-col gap-y-3">
-                <BlurFade delay={BLUR_FADE_DELAY * 11}>
-                    <div class="flex items-center justify-between mb-4">
-                        <h2 id="projects-title" class="text-xl font-bold">Selected Projects</h2>
-                        <a href="/projects" class="text-sm text-muted-foreground hover:text-foreground"> View all → </a>
-                    </div>
-                </BlurFade>
+                <div class="flex items-center justify-between mb-4">
+                    <h2 id="projects-title" class="text-xl font-bold">Selected Projects</h2>
+                    <a href="/projects" class="text-sm text-muted-foreground hover:text-foreground"> View all → </a>
+                </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 list-none p-0" role="list">
                     {
                         featuredProjects.map((project, index) => (
-                            <BlurFade delay={BLUR_FADE_DELAY * 6 + index * 0.05}>
-                                <ProjectCard
-                                    href={`/projects/${project.slug}`}
-                                    title={project.data.title}
-                                    description={project.data.description}
-                                    dates={project.data.dates}
-                                    tags={project.data.technologies}
-                                    image={project.data.image}
-                                    links={project.data.links}
-                                />
-                            </BlurFade>
+                            <ProjectCard
+                                href={`/projects/${project.slug}`}
+                                title={project.data.title}
+                                description={project.data.description}
+                                dates={project.data.dates}
+                                tags={project.data.technologies}
+                                image={project.data.image}
+                                links={project.data.links}
+                            />
                         ))
                     }
                 </div>

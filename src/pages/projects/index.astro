@@ -2,12 +2,8 @@
 import { getCollection } from "astro:content";
 import { ClientRouter } from "astro:transitions";
 import Layout from "@/layouts/Layout.astro";
-import Header from "@/components/header.astro";
 import Footer from "@/components/footer.astro";
 import { ProjectCard } from "@/components/project-card";
-import BlurFade from "@/components/ui/blur-fade.astro";
-
-const BLUR_FADE_DELAY = 0.04;
 
 const [profile] = await getCollection("profile");
 const projects = await getCollection("projects", ({ data }) => !data.draft);
@@ -17,22 +13,20 @@ const projects = await getCollection("projects", ({ data }) => !data.draft);
     <ClientRouter />
     <div class="flex flex-col items-center min-h-screen py-16 container max-w-screen-md space-y-10">
         <main role="main" class="flex-1 w-full">
-            <BlurFade delay={BLUR_FADE_DELAY * 2} className="text-3xl font-bold" aria-label="All Projects"><h1>Projects</h1></BlurFade>
+            <h1 class="text-3xl font-bold" aria-label="All Projects">Projects</h1>
             <p class="text-muted-foreground mt-2">Here are some of the projects I've worked on.</p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 list-none p-0 mt-8" role="list">
                 {
                     projects.map((project, index) => (
-                        <BlurFade delay={BLUR_FADE_DELAY * 3 * index + 0.02}>
-                            <ProjectCard
-                                href={`/projects/${project.slug}`}
-                                title={project.data.title}
-                                description={project.data.description}
-                                dates={project.data.dates}
-                                tags={project.data.technologies}
-                                image={project.data.image}
-                                links={project.data.links}
-                            />
-                        </BlurFade>
+                        <ProjectCard
+                            href={`/projects/${project.slug}`}
+                            title={project.data.title}
+                            description={project.data.description}
+                            dates={project.data.dates}
+                            tags={project.data.technologies}
+                            image={project.data.image}
+                            links={project.data.links}
+                        />
                     ))
                 }
             </div>
