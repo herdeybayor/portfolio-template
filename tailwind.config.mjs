@@ -65,6 +65,23 @@ export default {
             fontFamily: {
                 sans: ["Inter", "system-ui", "sans-serif"],
             },
+            keyframes: {
+                "blur-fade-in": {
+                    from: {
+                        opacity: "0",
+                        filter: "blur(6px)",
+                        transform: "translateY(12px)",
+                    },
+                    to: {
+                        opacity: "1",
+                        filter: "blur(0)",
+                        transform: "translateY(0px)",
+                    },
+                },
+            },
+            animation: {
+                "blur-fade-in": "blur-fade-in 1s ease-out forwards",
+            },
         },
     },
     plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],

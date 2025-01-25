@@ -1,5 +1,5 @@
 ---
-import { BlurFade } from "@/components/ui/blur-fade";
+import BlurFade from "@/components/ui/blur-fade.astro";
 import { Separator } from "@/components/ui/separator";
 import { SocialLinks } from "@/components/social-links";
 import { ModeToggle } from "./mode-toggle";
@@ -21,7 +21,7 @@ const { name, social, location } = Astro.props;
 ---
 
 <header role="banner">
-    <BlurFade client:load>
+    <BlurFade>
         <nav class="flex items-center justify-between gap-4 rounded-full bg-white/50 dark:bg-gray-950/50 p-4 border border-border dark:border-gray-800 shadow-sm" aria-label="Main navigation">
             <a href="/" class="flex items-center gap-2">
                 <span class="text-sm font-medium" aria-label="Full name">{name}</span>
