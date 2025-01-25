@@ -3,6 +3,7 @@ import { BlurFade } from "@/components/ui/blur-fade";
 import { Separator } from "@/components/ui/separator";
 import { SocialLinks } from "@/components/social-links";
 import { ModeToggle } from "./mode-toggle";
+import { MobileNav } from "./mobile-nav";
 
 interface Props {
     name: string;
@@ -21,26 +22,35 @@ const { name, social, location } = Astro.props;
 
 <header role="banner">
     <BlurFade client:load>
-        <nav class="flex items-center gap-4 rounded-full bg-white/50 dark:bg-gray-950/50 p-4 border border-border dark:border-gray-800 shadow-sm" aria-label="Main navigation">
+        <nav class="flex items-center justify-between gap-4 rounded-full bg-white/50 dark:bg-gray-950/50 p-4 border border-border dark:border-gray-800 shadow-sm" aria-label="Main navigation">
             <a href="/" class="flex items-center gap-2">
                 <span class="text-sm font-medium" aria-label="Full name">{name}</span>
             </a>
-            <Separator className="h-5" orientation="vertical" role="separator" aria-orientation="vertical" />
-            <SocialLinks client:load social={social} />
-            <Separator className="h-5" orientation="vertical" role="separator" aria-orientation="vertical" />
-            <a href={location.link} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2" aria-label={`Location: ${location.city}, ${location.country.flag}`}>
-                <span class="text-sm font-medium">{location.city}</span>
-                <span class="text-sm font-medium" role="img" aria-label={`Flag of ${location.country.flag}`}>
-                    {location.country.flag}
-                </span>
-            </a>
-            <Separator className="h-5" orientation="vertical" role="separator" aria-orientation="vertical" />
-            <div class="flex items-center gap-2" role="status" aria-label="Availability status">
-                <div class="size-2 rounded-full bg-green-500" aria-hidden="true"></div>
-                <span class="text-sm font-medium">Available for hire</span>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center gap-4">
+                <Separator className="h-5" orientation="vertical" role="separator" aria-orientation="vertical" />
+                <SocialLinks client:load social={social} />
+                <Separator className="h-5" orientation="vertical" role="separator" aria-orientation="vertical" />
+                <a href={location.link} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2" aria-label={`Location: ${location.city}, ${location.country.flag}`}>
+                    <span class="text-sm font-medium">{location.city}</span>
+                    <span class="text-sm font-medium" role="img" aria-label={`Flag of ${location.country.flag}`}>
+                        {location.country.flag}
+                    </span>
+                </a>
+                <Separator className="h-5" orientation="vertical" role="separator" aria-orientation="vertical" />
+                <div class="flex items-center gap-2" role="status" aria-label="Availability status">
+                    <div class="size-2 rounded-full bg-green-500" aria-hidden="true"></div>
+                    <span class="text-sm font-medium">Available for hire</span>
+                </div>
+                <Separator className="h-5" orientation="vertical" role="separator" aria-orientation="vertical" />
+                <ModeToggle client:load />
             </div>
-            <Separator className="h-5" orientation="vertical" role="separator" aria-orientation="vertical" />
-            <ModeToggle client:load />
+
+            <!-- Mobile Navigation -->
+            <div class="md:hidden">
+                <MobileNav client:load name={name} social={social} location={location} />
+            </div>
         </nav>
     </BlurFade>
 </header>
