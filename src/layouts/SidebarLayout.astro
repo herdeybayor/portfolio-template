@@ -31,7 +31,7 @@ const socialLinks = social.filter((item) => item.navbar);
 
 <div class="flex flex-col lg:flex-row bg-[#F3F4F4] dark:bg-[#141414] h-screen overflow-hidden">
     <div class="lg:w-64 lg:h-screen p-4 flex flex-col items-center">
-        <input hidden class="peer" type="checkbox" id="toggle" />
+        <input hidden class="peer/bugger bugger-checkbox" type="checkbox" id="toggle" />
         <div class="flex flex-row lg:flex-col items-center order-1 gap-2 lg:gap-4 mt-0 lg:mt-5 w-full">
             <ProfileAvatar client:load name={title} avatarUrl={avatarUrl} initials={initials} className="size-12 lg:size-20 border rounded-xl" fallbackClassName="rounded-xl" />
             <div class="flex flex-col items-start lg:items-center">
@@ -44,9 +44,9 @@ const socialLinks = social.filter((item) => item.navbar);
                 <Separator className="h-5" orientation="vertical" role="separator" aria-orientation="vertical" />
                 <label for="toggle" class="cursor-pointer">
                     <div role="status" aria-label="Menu" class="flex flex-col items-start gap-1 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-md p-3 transition-all duration-200">
-                        <div class="h-0.5 w-5 rounded-full bg-gray-400 dark:bg-gray-400 transition-all duration-200"></div>
-                        <div class="h-0.5 w-3.5 rounded-full bg-gray-400 dark:bg-gray-400 transition-all duration-200"></div>
-                        <div class="h-0.5 w-5 rounded-full bg-gray-400 dark:bg-gray-400 transition-all duration-200"></div>
+                        <div class="bugger-line bugger-line-1"></div>
+                        <div class="bugger-line bugger-line-2"></div>
+                        <div class="bugger-line bugger-line-3"></div>
                     </div>
                 </label>
             </div>
@@ -54,7 +54,7 @@ const socialLinks = social.filter((item) => item.navbar);
 
         <Separator className="w-full mt-4 lg:mt-0 order-1 hidden lg:hidden peer-checked:block" />
 
-        <div class="items-center gap-8 lg:gap-4 mt-5 lg:mt-8 order-2 lg:order-1 hidden lg:flex peer-checked:flex">
+        <div class="items-center gap-8 lg:gap-4 mt-5 lg:mt-8 order-2 lg:order-1 hidden lg:flex peer-checked/bugger:flex">
             {
                 socialLinks.map((item) => {
                     const Icon = item.icon ? Icons[item.icon as keyof typeof Icons] : null;
@@ -68,7 +68,7 @@ const socialLinks = social.filter((item) => item.navbar);
             }
         </div>
 
-        <ul class="flex-col gap-2 mt-8 w-full order-1 px-4 lg:px-0 hidden lg:flex peer-checked:flex">
+        <ul class="flex-col gap-2 mt-8 w-full order-1 px-4 lg:px-0 hidden lg:flex peer-checked/bugger:flex">
             {
                 sidebar.map((item) => {
                     const Icon = item.icon ? Icons[item.icon as keyof typeof Icons] : null;
@@ -91,7 +91,7 @@ const socialLinks = social.filter((item) => item.navbar);
             }
         </ul>
 
-        <Separator className="w-full h-0.5 mt-4 lg:mt-0 order-1 lg:hidden hidden peer-checked:block" />
+        <Separator className="w-full h-0.5 mt-4 lg:mt-0 order-1 lg:hidden hidden peer-checked/bugger:block" />
 
         <div class="items-center justify-center gap-4 mt-auto order-3 hidden lg:flex">
             <ModeToggle client:load />
