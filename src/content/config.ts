@@ -90,6 +90,14 @@ const profileSchema = z.object({
             })
         ),
     }),
+    testimonials: z.array(
+        z.object({
+            quote: z.string(),
+            name: z.string(),
+            designation: z.string(),
+            src: z.string(),
+        })
+    ),
 });
 
 export const collections = {

@@ -8,8 +8,7 @@ import { cn } from "@/lib/utils";
 import { ResumeCard } from "@/components/resume-card";
 import ProjectCard from "@/components/project-card.astro";
 import { Badge } from "@/components/ui/badge";
-
-const BLUR_FADE_DELAY = 0.04;
+import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 
 const [profile] = await getCollection("profile");
 const projects = await getCollection("projects");
@@ -140,6 +139,13 @@ const education = await getCollection("education");
                         ))
                     }
                 </div>
+            </div>
+        </section>
+
+        <section id="testimonials" aria-labelledby="testimonials-title" class="w-full">
+            <div class="flex min-h-0 flex-col gap-y-3">
+                <h2 id="testimonials-title" class="text-xl font-bold">What People Say</h2>
+                <AnimatedTestimonials client:load testimonials={profile.data.testimonials} />
             </div>
         </section>
 

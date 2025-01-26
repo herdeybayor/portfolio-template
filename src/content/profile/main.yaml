@@ -76,3 +76,12 @@ contact:
             url: "mailto:herdeybayor4real@gmail.com"
             icon: "email"
             navbar: false
+testimonials:
+    - quote: "Sherifdeen is a very skilled frontend engineer. From coming onboard, to taking up tasks, and delivering every part of the project beyond expectations. He has a good eye for design, implements pixel perfectly and also does integration exceptionally well, he's one you're always looking forward to work with."
+      name: "Isaiah Adeleke"
+      designation: "Senior Product Designer"
+      src: "/images/profile/testimonials/isaiah.png"
+    - quote: "Sherifdeen is a top-notch software engineer who knows much about front-end development and UI/UX design. He is very skilled at Next.js, Redux, TypeScript, and GraphQL. Sherifdeen has excellent technical skills and a knack for designing things with the user in mind. He also works well with others, which makes him a great asset to any project."
+      name: "John Olatubosun"
+      designation: "Software Engineer"
+      src: "/images/profile/testimonials/john.png"
