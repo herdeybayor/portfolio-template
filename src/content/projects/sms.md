@@ -17,7 +17,7 @@ links:
     icon: 'globe'
 image: '/images/projects/template.jpeg'
 featured: true
-draft: true
+draft: false
 ---
 
 ![Template](/images/projects/template.jpeg)
