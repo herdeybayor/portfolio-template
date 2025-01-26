@@ -20,7 +20,7 @@ featured: true
 draft: false
 ---
 
-![Eat & Vibe](/images/projects/template.jpeg)
+![Eat & Vibe](/images/projects/eatandvibe.jpeg)
 
 # Eat & Vibe - Social Food Discovery Platform Case Study
 
