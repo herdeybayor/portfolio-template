@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import Footer from "@/components/footer.astro";
-import { ProjectCard } from "@/components/project-card";
+import ProjectCard from "@/components/project-card.astro";
 
 const [profile] = await getCollection("profile");
 const projects = await getCollection("projects", ({ data }) => !data.draft);
