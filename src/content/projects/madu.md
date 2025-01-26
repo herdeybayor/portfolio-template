@@ -17,7 +17,7 @@ links:
       href: "https://madu.com.ng/"
       icon: "globe"
 image: "/images/projects/madu.jpeg"
-featured: true
+featured: false
 draft: false
 ---
 

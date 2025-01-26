@@ -17,7 +17,7 @@ links:
       href: "https://www.learnhouz.com/"
       icon: "globe"
 image: "/images/projects/learnhouz.jpeg"
-featured: true
+featured: false
 draft: false
 ---
 

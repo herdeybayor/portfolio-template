@@ -17,7 +17,7 @@ links:
       href: "https://yoursjournaly.com/"
       icon: "globe"
 image: "/images/projects/yoursjournaly.jpeg"
-featured: true
+featured: false
 draft: false
 ---
 
