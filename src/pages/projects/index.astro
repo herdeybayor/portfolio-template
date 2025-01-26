@@ -11,8 +11,8 @@ const projects = await getCollection("projects", ({ data }) => !data.draft);
 <Layout title="Projects - Portfolio" description="View all my projects and case studies">
     <div class="flex flex-col items-center min-h-screen py-16 container max-w-screen-md space-y-10">
         <main role="main" class="flex-1 w-full">
-            <h1 class="text-3xl font-bold" aria-label="All Projects">Projects</h1>
-            <p class="text-muted-foreground mt-2">Here are some of the projects I've worked on.</p>
+            <h1 class="text-3xl font-bold" aria-label="All Projects" data-aos="fade-down">Projects</h1>
+            <p class="text-muted-foreground mt-2" data-aos="fade-up" data-aos-delay="100">Here are some of the projects I've worked on.</p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 list-none p-0 mt-8" role="list">
                 {
                     projects.map((project, index) => (
@@ -24,12 +24,14 @@ const projects = await getCollection("projects", ({ data }) => !data.draft);
                             tags={project.data.technologies}
                             image={project.data.image}
                             links={project.data.links}
+                            data-aos="fade-up"
+                            data-aos-delay={index * 100}
                         />
                     ))
                 }
             </div>
         </main>
 
-        <Footer social={profile.data.contact.social} />
+        <Footer social={profile.data.contact.social} data-aos="fade-up" data-aos-delay="200" />
     </div>
 </Layout>
