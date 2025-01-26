@@ -16,17 +16,17 @@ const projects = await getCollection("projects", ({ data }) => !data.draft);
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 list-none p-0 mt-8" role="list">
                 {
                     projects.map((project, index) => (
-                        <ProjectCard
-                            href={`/projects/${project.slug}`}
-                            title={project.data.title}
-                            description={project.data.description}
-                            dates={project.data.dates}
-                            tags={project.data.technologies}
-                            image={project.data.image}
-                            links={project.data.links}
-                            data-aos="fade-up"
-                            data-aos-delay={index * 100}
-                        />
+                        <div class="w-full" data-aos="fade-up" data-aos-delay={index * 100}>
+                            <ProjectCard
+                                href={`/projects/${project.slug}`}
+                                title={project.data.title}
+                                description={project.data.description}
+                                dates={project.data.dates}
+                                tags={project.data.technologies}
+                                image={project.data.image}
+                                links={project.data.links}
+                            />
+                        </div>
                     ))
                 }
             </div>
