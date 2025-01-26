@@ -1,8 +1,10 @@
 ---
 import "@/styles/globals.css";
+import "aos/dist/aos.css";
 import SEO from "@/components/seo.astro";
 import { getCollection } from "astro:content";
 import SidebarLayout from "./SidebarLayout.astro";
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
     title?: string;
@@ -38,6 +40,7 @@ const [profile] = await getCollection("profile");
 
 <html lang="en" class="scroll-smooth">
     <head>
+        <ClientRouter />
         <!-- Resource hints -->
         <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
@@ -58,6 +61,18 @@ const [profile] = await getCollection("profile");
         <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
     </head>
     <body class="min-h-screen bg-background text-foreground antialiased font-sans">
+        <!-- AOS Script -->
+        <script>
+            import { aosInit } from "@/js/aos";
+
+            // runs on initial page load
+            aosInit();
+
+            // runs on view transitions navigation
+            document.addEventListener("astro:after-swap", aosInit);
+            // see here for details https://docs.astro.build/en/guides/view-transitions/#script-behavior-during-page-navigation
+        </script>
+
         <!-- Skip to main content -->
         <a
             href="#main-content"
@@ -76,8 +91,8 @@ const [profile] = await getCollection("profile");
                 avatarUrl={profile.data.avatarUrl}
                 initials={profile.data.initials}
             >
-                <slot /></SidebarLayout
-            >
+                <slot />
+            </SidebarLayout>
         </div>
 
         <!-- Offline support -->

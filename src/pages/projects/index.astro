@@ -1,6 +1,5 @@
 ---
 import { getCollection } from "astro:content";
-import { ClientRouter } from "astro:transitions";
 import Layout from "@/layouts/Layout.astro";
 import Footer from "@/components/footer.astro";
 import { ProjectCard } from "@/components/project-card";
@@ -10,7 +9,6 @@ const projects = await getCollection("projects", ({ data }) => !data.draft);
 ---
 
 <Layout title="Projects - Portfolio" description="View all my projects and case studies">
-    <ClientRouter />
     <div class="flex flex-col items-center min-h-screen py-16 container max-w-screen-md space-y-10">
         <main role="main" class="flex-1 w-full">
             <h1 class="text-3xl font-bold" aria-label="All Projects">Projects</h1>
