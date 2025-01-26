@@ -20,7 +20,7 @@ const featuredProjects = projects.filter((project) => project.data.featured && !
 const education = await getCollection("education");
 ---
 
-<Layout title={`${profile.data.name} - Portfolio`} description={profile.data.summary} type="profile" image={profile.data.avatarUrl}>
+<Layout title={`${profile.data.name} - Portfolio`} description={profile.data.summary} type="profile" image="https://raw.githubusercontent.com/sherifdeen-portfolio/preview/main/preview.jpeg">
     <ClientRouter />
     <div class="flex flex-col items-center py-12 lg:py-24 container max-w-screen-md space-y-10">
         <main role="main" class="flex flex-col">

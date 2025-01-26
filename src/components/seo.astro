@@ -9,7 +9,15 @@ interface Props {
     author?: string;
 }
 
-const { title, description, image = "/og-image.png", canonicalURL = Astro.url.href, type = "website", publishedDate, author = "Your Name" } = Astro.props;
+const {
+    title,
+    description,
+    image = "https://raw.githubusercontent.com/sherifdeen-portfolio/preview/main/preview.jpeg",
+    canonicalURL = Astro.url.href,
+    type = "website",
+    publishedDate,
+    author = "Sherifdeen Adebayo",
+} = Astro.props;
 
 // Ensure image URL is absolute
 const absoluteImageUrl = new URL(image, Astro.url.origin).href;
