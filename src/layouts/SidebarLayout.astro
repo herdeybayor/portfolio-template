@@ -29,8 +29,8 @@ const { sidebar, title, initials, tagline, avatarUrl, social } = Astro.props;
 const socialLinks = social.filter((item) => item.navbar);
 ---
 
-<div class="flex flex-col lg:flex-row bg-[#F3F4F4] dark:bg-[#141414] h-screen overflow-hidden">
-    <div class="lg:w-64 lg:h-screen p-4 flex flex-col items-center">
+<div class="flex flex-col lg:flex-row min-h-screen bg-[#F3F4F4] dark:bg-[#141414]">
+    <div class="lg:w-64 lg:fixed lg:inset-y-0 p-4 flex flex-col items-center">
         <input hidden class="peer/bugger bugger-checkbox" type="checkbox" id="toggle" />
         <div class="flex flex-row lg:flex-col items-center order-1 gap-2 lg:gap-4 mt-0 lg:mt-5 w-full">
             <ProfileAvatar client:load name={title} avatarUrl={avatarUrl} initials={initials} className="size-12 lg:size-20 border rounded-xl" fallbackClassName="rounded-xl" />
@@ -98,7 +98,7 @@ const socialLinks = social.filter((item) => item.navbar);
         </div>
     </div>
 
-    <div class="flex-1 overflow-scroll p-4 pt-0 lg:mt-4">
+    <div class="flex-1 lg:ml-64 p-4 pt-0 lg:mt-4">
         <div class="bg-white dark:bg-[#1A1A1A] flex-1 rounded-xl flex flex-col shadow-lg">
             <slot />
         </div>
