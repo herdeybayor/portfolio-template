@@ -21,7 +21,7 @@ featured: false
 draft: false
 ---
 
-![Template](/images/projects/template.jpeg)
+![Yours Journaly](/images/projects/yoursjournaly.jpeg)
 
 # Yours Journaly - Voice-First Journaling App Case Study
 
