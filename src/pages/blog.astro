@@ -1,0 +1,175 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Footer from "@/components/footer.astro";
+import { EmailButton } from "@/components/email-button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
+
+const [profile] = await getCollection("profile");
+---
+
+<Layout title={`Blog - ${profile.data.name}`} description="Coming soon - insights on full-stack development, DevOps practices, and the latest in web technologies.">
+    <div class="flex flex-col items-center py-12 lg:py-24 container max-w-screen-lg space-y-16">
+        <!-- Hero Section -->
+        <section class="text-center space-y-8 max-w-3xl" data-aos="fade-up">
+            <div class="w-max mx-auto flex items-center gap-2 bg-orange-100 px-3 py-1 rounded-full">
+                <div class="size-1.5 rounded-full bg-orange-800"></div>
+                <span class="text-xs text-orange-600">Work in Progress</span>
+            </div>
+
+            <div class="space-y-6">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">Blog Coming Soon 🚧</h1>
+
+                <p class="text-xl text-muted-foreground leading-relaxed">
+                    I'm currently working on creating valuable content about full-stack development, DevOps practices, and insights from 7 years of building software.
+                </p>
+            </div>
+
+            <!-- Construction Visual -->
+            <div class="relative py-12" data-aos="fade-up" data-aos-delay="200">
+                <div class="text-8xl md:text-9xl opacity-20 select-none">🏗️</div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="bg-background/80 backdrop-blur-sm border rounded-lg p-6 shadow-lg">
+                        <div class="flex items-center gap-3">
+                            <div class="animate-spin size-5 border-2 border-primary border-t-transparent rounded-full"></div>
+                            <span class="font-medium">Building something awesome...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What to Expect Section -->
+        <section class="w-full space-y-8" data-aos="fade-up">
+            <h2 class="text-2xl md:text-3xl font-bold text-center">What's Coming</h2>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-card border rounded-lg p-6 space-y-4 text-center">
+                    <div class="text-4xl mb-2">💻</div>
+                    <h3 class="text-xl font-semibold">Development Insights</h3>
+                    <p class="text-muted-foreground">Real-world experiences with React, Next.js, Node.js, and modern full-stack development practices.</p>
+                </div>
+
+                <div class="bg-card border rounded-lg p-6 space-y-4 text-center">
+                    <div class="text-4xl mb-2">⚙️</div>
+                    <h3 class="text-xl font-semibold">DevOps Deep Dives</h3>
+                    <p class="text-muted-foreground">Kubernetes orchestration, AWS infrastructure, CI/CD pipelines, and infrastructure-as-code tutorials.</p>
+                </div>
+
+                <div class="bg-card border rounded-lg p-6 space-y-4 text-center">
+                    <div class="text-4xl mb-2">🎨</div>
+                    <h3 class="text-xl font-semibold">Design & UX</h3>
+                    <p class="text-muted-foreground">Bridging the gap between design and development, from UI/UX principles to implementation strategies.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Topics Preview -->
+        <section class="w-full space-y-8" data-aos="fade-up">
+            <h2 class="text-2xl md:text-3xl font-bold text-center">Planned Topics</h2>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {
+                    [
+                        "Building Scalable Next.js Applications",
+                        "Kubernetes for Frontend Developers",
+                        "CI/CD Pipelines with Jenkins & GitHub Actions",
+                        "React Performance Optimization",
+                        "Infrastructure as Code with Terraform",
+                        "Mobile Development with React Native",
+                        "Database Design & Optimization",
+                        "From Design to Code: UI/UX Implementation",
+                        "Microservices Architecture Patterns",
+                        "Modern Authentication Strategies",
+                        "Cloud-Native Development on AWS",
+                        "API Design Best Practices",
+                    ].map((topic) => (
+                        <div class="flex items-center gap-3 p-4 bg-muted/30 rounded-lg border-l-4 border-primary/20">
+                            <div class="size-2 rounded-full bg-primary/60" />
+                            <span class="text-sm font-medium">{topic}</span>
+                        </div>
+                    ))
+                }
+            </div>
+        </section>
+
+        <!-- Progress Section -->
+        <section class="w-full space-y-8" data-aos="fade-up">
+            <div class="bg-gradient-to-r from-primary/10 to-secondary/10 border rounded-lg p-8 text-center space-y-6">
+                <h2 class="text-2xl font-bold">Development Progress</h2>
+
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center text-sm">
+                        <span>Content Planning</span>
+                        <span class="font-medium">✅ Complete</span>
+                    </div>
+                    <div class="w-full bg-muted rounded-full h-2">
+                        <div class="bg-green-600 h-2 rounded-full w-full"></div>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center text-sm">
+                        <span>Writing First Posts</span>
+                        <span class="font-medium">🚧 In Progress</span>
+                    </div>
+                    <div class="w-full bg-muted rounded-full h-2">
+                        <div class="bg-orange-600 h-2 rounded-full w-3/4"></div>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center text-sm">
+                        <span>Blog Platform Setup</span>
+                        <span class="font-medium">⏳ Coming Soon</span>
+                    </div>
+                    <div class="w-full bg-muted rounded-full h-2">
+                        <div class="bg-blue-600 h-2 rounded-full w-1/4"></div>
+                    </div>
+                </div>
+
+                <p class="text-muted-foreground mt-6">
+                    Expected launch: <span class="font-semibold text-foreground">Early 2025</span>
+                </p>
+            </div>
+        </section>
+
+        <!-- Stay Updated Section -->
+        <section class="w-full text-center space-y-6" data-aos="fade-up">
+            <div class="space-y-4">
+                <h2 class="text-2xl md:text-3xl font-bold">Stay in the Loop</h2>
+                <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+                    Want to be notified when I publish new content? Get in touch and I'll let you know when the blog goes live with valuable insights from the trenches.
+                </p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <EmailButton client:load email={profile.data.contact.email} />
+                <a href="/" class={cn(buttonVariants({ variant: "outline", size: "lg" }))}> Back to Portfolio </a>
+                <a href="/projects" class={cn(buttonVariants({ variant: "ghost", size: "lg" }))}> View My Projects </a>
+            </div>
+
+            <!-- Social Links -->
+            <div class="flex items-center justify-center gap-4 pt-8">
+                <p class="text-sm text-muted-foreground">Follow for updates:</p>
+                <div class="flex gap-3">
+                    {
+                        Object.entries(profile.data.contact.social)
+                            .filter(([key, social]) => social.navbar)
+                            .map(([key, social]) => (
+                                <a href={social.url} target="_blank" rel="noopener noreferrer" class="text-muted-foreground hover:text-foreground transition-colors" aria-label={social.name}>
+                                    <Badge variant="outline" className="px-3 py-1">
+                                        {social.name}
+                                    </Badge>
+                                </a>
+                            ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <Footer social={profile.data.contact.social} />
+    </div>
+</Layout>
