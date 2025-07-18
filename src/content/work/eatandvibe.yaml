@@ -1,0 +1,9 @@
+company: "Eat and Vibe"
+href: "https://eatandvibe.com"
+badges: []
+location: "Remote"
+title: "Full Stack Developer"
+logoUrl: "/images/work/eatandvibe.png"
+start: "Aug 2024"
+end: "May 2025"
+description: "Building a social dining platform that connects food enthusiasts and creates unique dining experiences. Developed using Next.js and TypeScript, with focus on real-time features and social interactions."

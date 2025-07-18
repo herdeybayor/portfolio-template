@@ -1,0 +1,9 @@
+company: "Learnhouz"
+href: "https://learnhouz.com"
+badges: []
+location: "Remote"
+title: "Technical Lead"
+logoUrl: "/images/work/learnhouz.svg"
+start: "October 2024"
+end: "June 2025"
+description: "Leading the development of an innovative e-learning platform focused on personalized learning experiences. Implemented advanced features using Next.js, TypeScript, and integrated AI-powered learning recommendations."

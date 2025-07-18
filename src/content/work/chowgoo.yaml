@@ -1,0 +1,9 @@
+company: "Chowgoo"
+href: "https://chowgoo.com"
+badges: []
+location: "Remote"
+title: "Senior Full Stack Engineer"
+logoUrl: "/images/work/chowgoo.png"
+start: "Aug 2023"
+end: "Oct 2024"
+description: "Building a food delivery and restaurant management platform with features for order management, delivery tracking, and restaurant analytics. Implemented using Next.js and TypeScript with focus on real-time updates and scalability."
