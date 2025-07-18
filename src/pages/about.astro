@@ -1,0 +1,228 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Footer from "@/components/footer.astro";
+import { EmailButton } from "@/components/email-button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
+
+const [profile] = await getCollection("profile");
+const work = await getCollection("work");
+const education = await getCollection("education");
+
+// Calculate total years of experience
+const totalExperience = 7;
+
+// Group skills by category
+const skillCategories = {
+    Frontend: ["JavaScript", "TypeScript", "React.js", "Next.js", "Angular", "Remix", "TailwindCSS", "Redux"],
+    Backend: ["Node.js", "Python", "Django", "Flask", "NestJS", "PHP", "Laravel", "C#", "Java", "C++", "C"],
+    Mobile: ["React Native", "iOS Development", "Android Development"],
+    DevOps: ["AWS", "Docker", "Kubernetes", "Jenkins", "Terraform", "Ansible", "Prometheus", "Linux", "Git", "Bash", "Nexus"],
+    Database: ["MongoDB", "MySQL", "PostgreSQL", "Prisma", "Drizzle"],
+    "Design & AI": ["Figma", "Adobe XD", "Photoshop", "WordPress", "AI Engineering", "Stripe"],
+};
+
+const currentRoles = work.filter((job) => job.data.end === "Present").length;
+---
+
+<Layout
+    title={`About ${profile.data.name} - Portfolio`}
+    description={`Learn more about ${profile.data.name}, a ${profile.data.tagline.toLowerCase()} passionate about building impactful web and mobile solutions.`}
+>
+    <div class="flex flex-col items-center py-12 lg:py-24 container max-w-screen-lg space-y-16">
+        <!-- Hero Section -->
+        <section class="flex flex-col lg:flex-row items-center gap-12 w-full">
+            <div class="flex-1 space-y-6" data-aos="fade-right">
+                <div class="w-max flex items-center gap-2 bg-blue-100 px-3 py-1 rounded-full">
+                    <div class="size-1.5 rounded-full bg-blue-800"></div>
+                    <span class="text-xs text-blue-600">About Me</span>
+                </div>
+
+                <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
+                    Hi, I'm {profile.data.name.split(" ")[0]} 👋
+                </h1>
+
+                <p class="text-lg text-muted-foreground leading-relaxed">
+                    {profile.data.description}
+                </p>
+
+                <div class="flex flex-wrap gap-4 pt-2">
+                    <div class="flex items-center gap-2 text-sm text-muted-foreground">
+                        <span class="font-medium">{profile.data.location.country.flag}</span>
+                        <span>Based in {profile.data.location.city}, {profile.data.location.country.name}</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-muted-foreground">
+                        <span class="font-medium">💼</span>
+                        <span>{totalExperience}+ years experience</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-muted-foreground">
+                        <span class="font-medium">🎯</span>
+                        <span>{currentRoles} current role{currentRoles !== 1 ? "s" : ""}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex-shrink-0" data-aos="fade-left">
+                <img src={profile.data.avatarUrl} alt={profile.data.name} class="w-64 h-64 lg:w-80 lg:h-80 rounded-2xl object-cover shadow-2xl" />
+            </div>
+        </section>
+
+        <!-- My Story Section -->
+        <section class="w-full space-y-8" data-aos="fade-up">
+            <h2 class="text-2xl md:text-3xl font-bold text-center">My Story</h2>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-card border rounded-lg p-6 space-y-4">
+                    <div class="flex items-center gap-2">
+                        <span class="text-2xl">🚀</span>
+                        <h3 class="text-xl font-semibold">Journey</h3>
+                    </div>
+                    <div class="space-y-4 text-muted-foreground">
+                        <p>
+                            My journey in tech began with a UI/UX design background and curiosity about how things work behind the scenes. What started as designing beautiful interfaces evolved into
+                            full-stack development and eventually DevOps engineering, creating a unique perspective on the entire product lifecycle.
+                        </p>
+                        <p>
+                            Over 7 years, I've had the privilege of working with diverse teams across different continents, building everything from mobile apps to infrastructure automation systems
+                            that serve thousands of users daily.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-card border rounded-lg p-6 space-y-4">
+                    <div class="flex items-center gap-2">
+                        <span class="text-2xl">💡</span>
+                        <h3 class="text-xl font-semibold">Philosophy</h3>
+                    </div>
+                    <div class="space-y-4 text-muted-foreground">
+                        <p>
+                            I believe in bridging the gap between design, development, and operations. My approach combines technical excellence with design thinking, ensuring that every solution is
+                            not just functional but also intuitive and scalable.
+                        </p>
+                        <p>
+                            From crafting pixel-perfect UIs to orchestrating Kubernetes clusters, I focus on creating robust systems that delight users while being maintainable and secure. Continuous
+                            learning keeps me at the forefront of emerging technologies across the entire tech stack.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="w-full space-y-8" data-aos="fade-up">
+            <h2 class="text-2xl md:text-3xl font-bold text-center">Technical Expertise</h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {
+                    Object.entries(skillCategories).map(([category, skills], index) => (
+                        <div class="bg-card border rounded-lg p-6 space-y-4" data-aos="fade-up" data-aos-delay={index * 100}>
+                            <h3 class="text-lg font-semibold">{category}</h3>
+                            <div class="flex flex-wrap gap-2">
+                                {skills
+                                    .filter((skill) => profile.data.skills.includes(skill))
+                                    .map((skill) => (
+                                        <Badge variant="secondary" className="text-xs">
+                                            {skill}
+                                        </Badge>
+                                    ))}
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+        </section>
+
+        <!-- What I'm Up To Section -->
+        <section class="w-full space-y-8" data-aos="fade-up">
+            <h2 class="text-2xl md:text-3xl font-bold text-center">What I'm Up To</h2>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-card border rounded-lg p-6 text-center space-y-4">
+                    <div class="text-4xl mb-2">🔥</div>
+                    <h3 class="text-xl font-semibold">Currently Building</h3>
+                    <p class="text-muted-foreground">
+                        Building fintech platforms with React/Next.js frontends, Node.js/Python backends, and AWS/Kubernetes infrastructure. Implementing CI/CD pipelines and infrastructure as code for
+                        scalable, secure applications.
+                    </p>
+                </div>
+
+                <div class="bg-card border rounded-lg p-6 text-center space-y-4">
+                    <div class="text-4xl mb-2">📚</div>
+                    <h3 class="text-xl font-semibold">Learning</h3>
+                    <p class="text-muted-foreground">
+                        Exploring advanced DevOps practices, AI engineering, Kubernetes orchestration, and modern frontend frameworks. Currently diving deep into infrastructure automation and
+                        cloud-native architectures.
+                    </p>
+                </div>
+
+                <div class="bg-card border rounded-lg p-6 text-center space-y-4">
+                    <div class="text-4xl mb-2">🤝</div>
+                    <h3 class="text-xl font-semibold">Collaborating</h3>
+                    <p class="text-muted-foreground">
+                        Leading cross-functional teams spanning design, development, and DevOps. Mentoring developers in full-stack technologies and contributing to open-source infrastructure and
+                        development tools.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fun Facts Section -->
+        <section class="w-full space-y-8" data-aos="fade-up">
+            <h2 class="text-2xl md:text-3xl font-bold text-center">Beyond Code</h2>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="flex items-center gap-3 p-4 bg-muted/50 rounded-lg">
+                    <span class="text-2xl">🌍</span>
+                    <div>
+                        <div class="font-medium">Global Remote</div>
+                        <div class="text-sm text-muted-foreground">Working across timezones</div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 p-4 bg-muted/50 rounded-lg">
+                    <span class="text-2xl">⚙️</span>
+                    <div>
+                        <div class="font-medium">DevOps Mindset</div>
+                        <div class="text-sm text-muted-foreground">Automates everything</div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 p-4 bg-muted/50 rounded-lg">
+                    <span class="text-2xl">🎨</span>
+                    <div>
+                        <div class="font-medium">Design Background</div>
+                        <div class="text-sm text-muted-foreground">UI/UX focused thinking</div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 p-4 bg-muted/50 rounded-lg">
+                    <span class="text-2xl">🚀</span>
+                    <div>
+                        <div class="font-medium">Innovation</div>
+                        <div class="text-sm text-muted-foreground">Always pushing boundaries</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="w-full text-center space-y-6" data-aos="fade-up">
+            <div class="space-y-4">
+                <h2 class="text-2xl md:text-3xl font-bold">Let's Build Something Amazing</h2>
+                <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+                    I'm always excited to discuss new opportunities, collaborate on interesting projects, or simply chat about the latest in tech. Let's connect!
+                </p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <EmailButton client:load email={profile.data.contact.email} />
+                <a href={profile.data.resumeUrl} class={cn(buttonVariants({ variant: "outline", size: "lg" }))} target="_blank" rel="noopener noreferrer" download> Download Resume </a>
+                <a href="/projects" class={cn(buttonVariants({ variant: "ghost", size: "lg" }))}> View My Work </a>
+            </div>
+        </section>
+
+        <Footer social={profile.data.contact.social} />
+    </div>
+</Layout>
