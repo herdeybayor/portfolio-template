@@ -12,7 +12,7 @@ location:
     link: "https://www.google.com/maps/place/lagos"
 description: "Full Stack Developer & DevOps Engineer with a UI/UX background and 7 years of building experience. I specialize in creating scalable web and mobile solutions, implementing robust infrastructure automation, and designing intuitive user experiences that drive business growth."
 summary: "Full Stack Developer & DevOps Engineer with expertise in building performant applications, managing cloud infrastructure, and crafting engaging user experiences. I thrive in collaborative environments and am passionate about leveraging emerging technologies to solve complex problems."
-avatarUrl: "/images/profile/avatar2.jpg"
+avatarUrl: "/images/profile/avatar.png"
 skills:
     # Frontend Development
     - JavaScript
