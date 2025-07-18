@@ -1,0 +1,166 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Footer from "@/components/footer.astro";
+import { EmailButton } from "@/components/email-button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
+
+const [profile] = await getCollection("profile");
+---
+
+<Layout title={`Contact ${profile.data.name} - Portfolio`} description={`Get in touch with ${profile.data.name} for collaboration opportunities, project inquiries, or technical discussions.`}>
+    <div class="flex flex-col items-center py-12 lg:py-24 container max-w-screen-lg space-y-16">
+        <!-- Hero Section -->
+        <section class="text-center space-y-8 max-w-3xl" data-aos="fade-up">
+            <div class="w-max mx-auto flex items-center gap-2 bg-purple-100 px-3 py-1 rounded-full">
+                <div class="size-1.5 rounded-full bg-purple-800"></div>
+                <span class="text-xs text-purple-600">Let's Connect</span>
+            </div>
+
+            <div class="space-y-6">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">Get In Touch 📬</h1>
+
+                <p class="text-xl text-muted-foreground leading-relaxed">
+                    Whether you're looking to collaborate on a project, need technical consulting, or just want to chat about the latest in tech, I'd love to hear from you!
+                </p>
+            </div>
+        </section>
+
+        <!-- Contact Methods -->
+        <section class="w-full space-y-8" data-aos="fade-up">
+            <h2 class="text-2xl md:text-3xl font-bold text-center">Ways to Reach Me</h2>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Email Card -->
+                <div class="bg-card border rounded-lg p-8 space-y-6 text-center">
+                    <div class="text-5xl mb-4">📧</div>
+                    <h3 class="text-2xl font-semibold">Email Me</h3>
+                    <p class="text-muted-foreground">For project inquiries, collaboration opportunities, or detailed discussions. I typically respond within 24 hours.</p>
+                    <div class="pt-4">
+                        <EmailButton client:load email={profile.data.contact.email} />
+                    </div>
+                </div>
+
+                <!-- Social Media Card -->
+                <div class="bg-card border rounded-lg p-8 space-y-6 text-center">
+                    <div class="text-5xl mb-4">💬</div>
+                    <h3 class="text-2xl font-semibold">Social Networks</h3>
+                    <p class="text-muted-foreground">Follow me for updates, quick questions, or to see what I'm working on. I'm most active on LinkedIn and Twitter.</p>
+                    <div class="flex flex-wrap justify-center gap-3 pt-4">
+                        {
+                            Object.entries(profile.data.contact.social).map(([key, social]) => (
+                                <a href={social.url} target="_blank" rel="noopener noreferrer" class={cn(buttonVariants({ variant: "outline", size: "sm" }))} aria-label={social.name}>
+                                    {social.name}
+                                </a>
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Response Time & Availability -->
+        <section class="w-full space-y-8" data-aos="fade-up">
+            <div class="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-950/20 dark:to-blue-950/20 border rounded-lg p-8 text-center space-y-6">
+                <h2 class="text-2xl font-bold">Current Availability</h2>
+
+                <div class="grid sm:grid-cols-3 gap-6">
+                    <div class="space-y-2">
+                        <div class="text-3xl">⚡</div>
+                        <h3 class="font-semibold">Response Time</h3>
+                        <p class="text-sm text-muted-foreground">Usually within 24 hours</p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="text-3xl">🌍</div>
+                        <h3 class="font-semibold">Timezone</h3>
+                        <p class="text-sm text-muted-foreground">West Africa Time (WAT)</p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="text-3xl">💼</div>
+                        <h3 class="font-semibold">Status</h3>
+                        <div class="flex items-center justify-center gap-2">
+                            <div class="size-2 rounded-full bg-green-600"></div>
+                            <p class="text-sm text-muted-foreground">Available for projects</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What I Can Help With -->
+        <section class="w-full space-y-8" data-aos="fade-up">
+            <h2 class="text-2xl md:text-3xl font-bold text-center">What I Can Help With</h2>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {
+                    [
+                        { icon: "🚀", title: "Full Stack Development", desc: "React, Next.js, Node.js applications" },
+                        { icon: "⚙️", title: "DevOps Consulting", desc: "AWS, Kubernetes, CI/CD setup" },
+                        { icon: "📱", title: "Mobile Development", desc: "React Native cross-platform apps" },
+                        { icon: "🎨", title: "UI/UX Implementation", desc: "Design to code translation" },
+                        { icon: "🏗️", title: "Architecture Review", desc: "System design and optimization" },
+                        { icon: "🔧", title: "Technical Mentoring", desc: "Career guidance and skill development" },
+                        { icon: "💡", title: "Product Strategy", desc: "Tech stack and approach planning" },
+                        { icon: "🛠️", title: "Code Review", desc: "Best practices and optimization" },
+                    ].map((service) => (
+                        <div class="bg-card border rounded-lg p-4 space-y-3 text-center hover:shadow-lg transition-shadow">
+                            <div class="text-2xl">{service.icon}</div>
+                            <h3 class="font-semibold text-sm">{service.title}</h3>
+                            <p class="text-xs text-muted-foreground">{service.desc}</p>
+                        </div>
+                    ))
+                }
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="w-full space-y-8" data-aos="fade-up">
+            <h2 class="text-2xl md:text-3xl font-bold text-center">Quick Questions</h2>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="space-y-4">
+                    <h3 class="font-semibold">💰 What are your rates?</h3>
+                    <p class="text-muted-foreground text-sm">Rates vary by project scope and duration. I'm happy to discuss your budget and find a solution that works for both of us.</p>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="font-semibold">⏰ How long do projects take?</h3>
+                    <p class="text-muted-foreground text-sm">Timeline depends on complexity. Simple projects can be done in 1-2 weeks, while larger applications may take 2-3 months.</p>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="font-semibold">🌍 Do you work remotely?</h3>
+                    <p class="text-muted-foreground text-sm">Yes! I work with teams globally and have experience collaborating across different timezones.</p>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="font-semibold">🔄 Do you provide ongoing support?</h3>
+                    <p class="text-muted-foreground text-sm">Absolutely. I offer maintenance packages and ongoing support for projects I've worked on.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="w-full text-center space-y-6" data-aos="fade-up">
+            <div class="space-y-4">
+                <h2 class="text-2xl md:text-3xl font-bold">Ready to Start Something Great?</h2>
+                <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+                    Let's discuss your project and see how I can help bring your ideas to life with clean code, solid architecture, and great user experience.
+                </p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <EmailButton client:load email={profile.data.contact.email} />
+                <a href={profile.data.resumeUrl} class={cn(buttonVariants({ variant: "outline", size: "lg" }))} target="_blank" rel="noopener noreferrer" download> Download Resume </a>
+                <a href="/projects" class={cn(buttonVariants({ variant: "ghost", size: "lg" }))}> View My Work </a>
+            </div>
+        </section>
+
+        <Footer social={profile.data.contact.social} />
+    </div>
+</Layout>
+
