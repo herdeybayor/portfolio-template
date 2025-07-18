@@ -11,6 +11,7 @@ const workSchema = z.object({
     start: z.string(),
     end: z.string(),
     description: z.string(),
+    priority: z.number().optional(), // Higher numbers = higher priority
 });
 
 const educationSchema = z.object({

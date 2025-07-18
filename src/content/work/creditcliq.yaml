@@ -7,3 +7,4 @@ logoUrl: "/images/work/creditcliq.ico"
 start: "Aug 2023"
 end: "Feb 2025"
 description: "Building a Super API for Global Credit Reports that helps financial institutions access international credit histories. Developing secure microservices for real-time credit data access, identity verification, and financial risk assessment. Implementing API integrations with global credit bureaus and creating developer-friendly SDKs. Working with cloud infrastructure on GCP and AWS to ensure high security and scalability."
+priority: 9

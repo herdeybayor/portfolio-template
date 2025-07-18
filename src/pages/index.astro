@@ -13,7 +13,30 @@ import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 const [profile] = await getCollection("profile");
 const projects = await getCollection("projects");
 const work = await getCollection("work");
-const sortedWork = work.sort((a, b) => new Date(b.data.start).getTime() - new Date(a.data.start).getTime());
+
+// Function to get role seniority score
+function getRoleSeniority(title: string): number {
+    const lowerTitle = title.toLowerCase();
+    if (lowerTitle.includes("lead") || lowerTitle.includes("principal") || lowerTitle.includes("architect")) return 3;
+    if (lowerTitle.includes("senior") || lowerTitle.includes("sr.")) return 2;
+    return 1;
+}
+
+// Sort work by relevance: priority first, then role seniority, then by date
+const sortedWork = work.sort((a, b) => {
+    // Primary: Sort by priority (higher priority first)
+    const priorityA = a.data.priority ?? 0;
+    const priorityB = b.data.priority ?? 0;
+    if (priorityA !== priorityB) return priorityB - priorityA;
+
+    // Secondary: Sort by role seniority
+    const seniorityA = getRoleSeniority(a.data.title);
+    const seniorityB = getRoleSeniority(b.data.title);
+    if (seniorityA !== seniorityB) return seniorityB - seniorityA;
+
+    // Tertiary: Sort by start date (most recent first)
+    return new Date(b.data.start).getTime() - new Date(a.data.start).getTime();
+});
 const featuredProjects = projects.filter((project) => project.data.featured && !project.data.draft);
 const education = await getCollection("education");
 ---

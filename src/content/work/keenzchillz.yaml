@@ -7,3 +7,4 @@ logoUrl: "/images/work/keenzchillz.png"
 start: "Aug 2023"
 end: "Present"
 description: "Architecting a property management platform for serviced accommodations, implementing features for booking management, guest services, and property maintenance. Built with Next.js and TypeScript, focusing on user experience and system reliability."
+priority: 8

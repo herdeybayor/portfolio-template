@@ -7,3 +7,4 @@ logoUrl: "/images/work/yoursjournaly.png"
 start: "2024"
 end: "Present"
 description: "Leading the development of a voice-first journaling app designed for women, implementing AI-powered mood insights and guided prompts. Built with Next.js, TypeScript, and integrated with cloud services for voice processing and analysis."
+priority: 8
