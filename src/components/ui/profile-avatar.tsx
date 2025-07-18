@@ -11,7 +11,7 @@ interface ProfileAvatarProps {
 export function ProfileAvatar({ name, avatarUrl, initials, className, fallbackClassName }: ProfileAvatarProps) {
     return (
         <Avatar className={className}>
-            <AvatarImage alt={name} src={avatarUrl} />
+            <AvatarImage alt={name} src={avatarUrl} className="object-cover" />
             <AvatarFallback className={fallbackClassName}>{initials}</AvatarFallback>
         </Avatar>
     );
